@@ -97,7 +97,7 @@ this.rain = function() {
   if(options.Direction == '↓'){
    this.y = (this.y >= height) ? this.y = this.y-height : this.y += options.DropSpeed;
  }else if(options.Direction == '↑'){
-   this.y = (this.y <= 0) ? this.y = this.y+height*2: this.y -= options.DropSpeed;
+   this.y = (this.y <= 0) ? this.y = this.y+height: this.y -= options.DropSpeed;
  }else if(options.Direction == 'freeAngle'){ 
    this.y = (this.y >= height*2) ? -height*2 : this.y += options.DropSpeed;
  }else if(options.Direction == '→'){ 
