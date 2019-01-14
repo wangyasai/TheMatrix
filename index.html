@@ -74,6 +74,8 @@
     DropSpeed : 2,  
     TextSpeed : 15,  
     Size : 14,
+    Direction : '↓',
+    RotateAngle: 45,
     Text : "*…o--------o…*",
     Random: function () { 
         options.Color = random([ [0,240,255],  [170,15,225],[0, 255, 70],[248,247,35],[240,16,134]]);
@@ -91,7 +93,7 @@
 
 
 
-  var text, gui, config,bgcolorControl,ShapeControl,LineControl,CountsCont,RandomControl,imageControl,color1Control,color2Control, SpeedControl, pngControl,SaveControl ,SmoothControl2,SaveControl,SizeControl,OpacityControl,ChangeSpeedControl,  UnicodeControl;
+  var text, gui, config,bgcolorControl,ShapeControl,LineControl,CountsCont,RandomControl,imageControl,color1Control,color2Control, SpeedControl, pngControl,SaveControl ,SmoothControl2,SaveControl,SizeControl,OpacityControl,ChangeSpeedControl,  UnicodeControl,RotateControl;
 
   window.onload = function() {
     gui = new dat.GUI();
@@ -118,7 +120,7 @@
 
 
 
-  SpeedControl = folder1.add(options, 'DropSpeed',0,5);
+  SpeedControl = folder1.add(options, 'DropSpeed',0,20);
   SpeedControl.onChange(draw);
   SpeedControl.listen();
 
@@ -127,9 +129,24 @@
   ChangeSpeedControl.onChange(Symbol);
   ChangeSpeedControl.listen();
 
+
+  DirectionControl = folder1.add(options, 'Direction',['↓', '↑','→','←','freeAngle'] );
+  DirectionControl.onChange(setup);
+  DirectionControl.onChange(draw);
+  DirectionControl.listen();
+
+
+  RotateControl = folder1.add(options, 'RotateAngle',0,360);
+  RotateControl.onChange(setup);
+  RotateControl.onChange(draw);
+  RotateControl.listen();
+
+
   UnicodeControl = folder1.add(options, 'Unicode',['Katakana', 'Braille','BoxDrawing','CJK Radicals Supplement','Kanbun','Yi Syllables','Text'] );
   UnicodeControl.onChange(Symbol);
   UnicodeControl.listen();
+
+
 
 
    var textControl = folder1.add(options, 'Text'); 
