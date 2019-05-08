@@ -92,8 +92,8 @@
 
   var type;
   var options ={  
-    Background :[10,10,10],
-    Color : [0, 255, 70],
+    Background : '#0a0a0a',
+    Color : '#01FF45',
     Opacity: 150,
     Unicode : 'Katakana',
     DropSpeed : 2,  
@@ -103,10 +103,17 @@
     RotateAngle: 45,
     Text : "*…o--------o…*",
     Random: function () { 
-      options.Color = random([ [0,240,255],  [170,15,225],[0, 255, 70],[248,247,35],[240,16,134]]);
-      options.TextSpeed = random(5,20);
-      options.Opacity = random(40,200);
-      options.Unicode = random(['Katakana', 'Braille','BoxDrawing','CJK Radicals Supplement','Kanbun','Yi Syllables']);
+      var Color = random(['#03F9FF','#FFE003','#ffffff','#FF039F']);
+      color1Control.setValue(Color);
+
+      TextSpeed = random(5,20);
+      ChangeSpeedControl.setValue(TextSpeed);
+
+      Opacity = random(100,200);
+      OpacityControl.setValue(Opacity);
+
+       Unicode = random(['Katakana', 'Braille','BoxDrawing','CJK Radicals Supplement','Kanbun','Yi Syllables']);
+       UnicodeControl.setValue(Unicode);
     },
 
     isPNG : false,
@@ -128,51 +135,39 @@
 
   bgcolorControl = folder1.addColor(options, 'Background');
   bgcolorControl.onChange(draw);
-  bgcolorControl.listen();
 
   color1Control = folder1.addColor(options, 'Color');
   color1Control.onChange(draw);
-  color1Control.listen();
 
 
   OpacityControl = folder1.add(options, 'Opacity',10,200);
   OpacityControl.onChange(draw);
-  OpacityControl.listen();
+
 
   SizeControl = folder1.add(options, 'Size',8,20);
   SizeControl.onChange(draw);
-  SizeControl.listen();
-
-
+ 
 
   SpeedControl = folder1.add(options, 'DropSpeed',0,20);
   SpeedControl.onChange(draw);
-  SpeedControl.listen();
 
 
   ChangeSpeedControl = folder1.add(options, 'TextSpeed',1,45);
   ChangeSpeedControl.onChange(Symbol);
-  ChangeSpeedControl.listen();
 
 
   DirectionControl = folder1.add(options, 'Direction',['↓', '↑','→','←','freeAngle'] );
   DirectionControl.onChange(setup);
   DirectionControl.onChange(draw);
-  DirectionControl.listen();
-
-
+ 
   RotateControl = folder1.add(options, 'RotateAngle',0,360);
   RotateControl.onChange(setup);
   RotateControl.onChange(draw);
-  RotateControl.listen();
-
+ 
 
   UnicodeControl = folder1.add(options, 'Unicode',['Katakana', 'Braille','BoxDrawing','CJK Radicals Supplement','Kanbun','Yi Syllables','Text'] );
   UnicodeControl.onChange(Symbol);
-  UnicodeControl.listen();
-
-
-
+ 
 
   var textControl = folder1.add(options, 'Text'); 
   textControl.onChange(function(){
@@ -181,7 +176,6 @@
   });
 
   RandomControl = folder1.add(options, 'Random');
-  RandomControl.listen();
 
   pngControl = folder1.add(options, 'isPNG');
   pngControl.onChange(draw);

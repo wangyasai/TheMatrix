@@ -2,6 +2,18 @@ var streams = [];
 var fadeInterval = 1.5;
 var myCanvas;
 
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+
+
 function setup() {
   myCanvas = createCanvas(windowWidth, windowHeight);
 
@@ -35,7 +47,8 @@ function draw() {
 
 
 function drawMatrix(){
- background(options.Background[0],options.Background[1],options.Background[2],options.Opacity);
+  var rgb = hexToRgb(options.Background);
+ background(rgb.r,rgb.g,rgb.b,options.Opacity);
  if(options.isPNG == true){
   clear();
 }
@@ -139,10 +152,11 @@ function Stream() {
 
   this.render = function() {
     this.symbols.forEach(function(symbol) {
+      var rgb = hexToRgb(options.Color);
       if (symbol.first) {
-        fill(options.Color[0], options.Color[1],options.Color[2],symbol.opacity);
+        fill(rgb.r,rgb.g,rgb.b,symbol.opacity);
       } else {
-        fill(options.Color[0]+50, options.Color[1]+50,options.Color[2]+50, symbol.opacity);
+        fill(rgb.r+50, rgb.g+50, rgb.b+50, symbol.opacity);
       }
 
       if(options.Direction == '→' || options.Direction == '←'){
